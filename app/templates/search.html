@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block search %}
+<h2>Enter your Spotify playlist URL below</h2>
+<form action="" method="post">
+    {{ searchBar.hidden_tag() }}
+    {{ searchBar.playlist_url }}
+    {{ searchBar.submit() }}
+</form>
+
+{{ playlist_id }}
+
+<table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Artist</th>
+            <th onclick="sortTable(1)">Track</th>
+            <th onclick="sortTable(2)">Dance Rating</th>
+            <th onclick="sortTable(3)">Energy Rating</th>
+            <th onclick="sortTable(4)">Positivity</th>
+            <th onclick="sortTable(5)">BPM</th>
+        </tr>
+        {% for r in result %}
+        <tr>
+            <td>{{ r['artist_name'] }}</td>
+            <td>"{{ r['track_title'] }}"</td>
+            <td class="danceRating">{{ r['dance_rating'] }}</td>
+            <td class="energyRating">{{ r['energy'] }}</td>
+            <td class="positivityRating">{{ r['valence'] }}</td>
+            <td class="bpm" id="bpm">{{ r['bpm'] / 100 }} </td>
+        </tr>
+        {% endfor %}
+        
+        </table>
+        
+
+{% endblock %}

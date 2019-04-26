@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block results %}
+
+<h2>Results:</h2>
+
+{{ playlistUrl }}
+
+<table id="myTable">
+        <tr>
+            <th onclick="sortTable(0)">Artist</th>
+            <th onclick="sortTable(1)">Track</th>
+            <th onclick="sortTable(2)">Dance Rating</th>
+            <th onclick="sortTable(3)">Energy Rating</th>
+            <th onclick="sortTable(4)">Positivity</th>
+            <th onclick="sortTable(5)">BPM</th>
+        </tr>
+        {% for p in package %}
+        <tr>
+            <td>{{ p['artist_name'] }}</td>
+            <td>"{{ p['track_title'] }}"</td>
+            <td class="danceRating">{{ p['dance_rating'] }}</td>
+            <td class="energyRating">{{ p['energy'] }}</td>
+            <td class="positivityRating">{{ p['valence'] }}</td>
+            <td class="bpm" id="bpm">{{ p['bpm'] / 100 }} </td>
+        </tr>
+        {% endfor %}
+        
+        </table>
+        
+
+{% endblock %}
