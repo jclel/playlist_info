@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
 {% block search %}
-<h2>Enter your Spotify playlist URL below</h2>
+<h2>Enter your Spotify playlist URI below</h2>
+<p class="description">(Under Share -> Copy Spotify URI.) <br>(It'll look something like <span>spotify:user:1230965869:playlist:1qbU8l1V5K0bx4Z2gDFx3K)</span></p>
 <form action="" method="post" id="search_form">
     {{ searchBar.hidden_tag() }}
     {{ searchBar.playlist_url(class_="search") }}<br><br>
     {{ searchBar.submit(class_="submit") }}
 </form>
-
+{% if result %}
 <p>Click one of the headings below to organise by ascending or descending.</p>
 
 <table id="myTable">
@@ -47,7 +48,7 @@
         {% endfor %}
         
         </table>
-        
+{% endif %}
 <script>
 
 const sortTable = (n) => {

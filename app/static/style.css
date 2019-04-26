@@ -80,18 +80,23 @@ tr {
 
 h1 {
     color: #1db954;
-}
-
-h2 {
-    color: #f741c0;
-}
-
-
-tr:hover {
-    /* background: #18a048; */
-    
+    letter-spacing: -5px;
+    font-size: 72pt;
     
 }
+
+.container h2 {
+    color: white;
+}
+
+.description {
+    font-size: 14px;
+}
+
+span {
+    border-bottom: 2px solid green;
+}
+
 
 td {
     padding: 15px;
