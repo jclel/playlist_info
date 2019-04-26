@@ -6,17 +6,10 @@ import json
 from forms import SearchPlaylist
 from config import Config
 app.config.from_object(Config)
-from urllib.parse import quote
-'''
-TO DO:
-- Get bearer token dynamically for each user
-- Cut playlist identifier out of URL entered in searchBar input
-'''
 
-#AUTH GUIDE: https://github.com/drshrey/spotify-flask-auth-example/blob/master/main.py
 
 base_url = 'https://api.spotify.com/v1/'
-# get bearer token dynamically somehow
+
 # headers = {'Authorization': "Bearer BQDQ_3MtGynPPeUImxIHR5UjXXqAsK5wLIFi76LPhUU341Crv3Fqj2-YpqoDOB7wKQO2qdi6WREHXk_SMTWBK5JATuIl4GdcWbUga7wTEbA08LZbSh8-2Vc71GCwYBmkheKZ8_QJNA6K9vUuRw"}
 
 CLIENT_ID = 'ec23aaee493741eba1126b2803ab7ef8'
@@ -25,18 +18,17 @@ CLIENT_SECRET = '133e431e70964c968d5ace30e3ef2608'
 BASE_64 = 'ZWMyM2FhZWU0OTM3NDFlYmExMTI2YjI4MDNhYjdlZjg6MTMzZTQzMWU3MDk2NGM5NjhkNWFjZTMwZTNlZjI2MDg='
 
 AUTH_ENDPOINT = 'https://accounts.spotify.com/api/token'
-GRANT_TYPE = 'CLIENT_CREDENTIALS'
-headers = {'Authorization': 'Basic ZWMyM2FhZWU0OTM3NDFlYmExMTI2YjI4MDNhYjdlZjg6MTMzZTQzMWU3MDk2NGM5NjhkNWFjZTMwZTNlZjI2MDg='}
+
+headers = {'Authorization': 'Basic ' + BASE_64}
 payload = {'client_id': CLIENT_ID, 'client_secret': CLIENT_SECRET}
 BASE64_ID = 'ZWMyM2FhZWU0OTM3NDFlYmExMTI2YjI4MDNhYjdlZjg='
 BASE64_SECRET = 'MTMzZTQzMWU3MDk2NGM5NjhkNWFjZTMwZTNlZjI2MDg='
+# Pass data as grant_type = client_credentials because we don't need to access any user data to get playlist values
+# This will authorize the app w/ Spotify instead, making it seamless for the user (and not hoovering any unwarranted user info in the process.)
 token = requests.post(AUTH_ENDPOINT, data={'grant_type':'client_credentials'}, headers=headers)
-print(token)
-print(token.json())
-tjson = token.json() 
-print(tjson['access_token'])
-
-headers = {'Authorization': "Bearer " + tjson['access_token']}
+token_json = token.json() 
+access_token = token_json['access_token']
+headers = {'Authorization': "Bearer " + access_token}
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

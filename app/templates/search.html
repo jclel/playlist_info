@@ -43,14 +43,14 @@
             <td>{{ r['speechiness'] }}</td>
             <!-- <td>{{ r['analysis_url'] }}</td> -->
 
-            
         </tr>
         {% endfor %}
         
         </table>
 {% endif %}
 <script>
-
+// Sorting func shamelessly/shamefully jacked from W3schools
+// https://www.w3schools.com/howto/howto_js_sort_table.asp
 const sortTable = (n) => {
     let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("myTable");
@@ -91,7 +91,9 @@ const sortTable = (n) => {
     }
 }
 
-
+// Shading danceability/energy/positivity columns
+// You can add "colourCode" to any <tr> element to add this shading
+// But you'll have to extend the logic to incorporate different scales for other metrics
 let cell = document.getElementsByClassName("colourCode") 
     for (let index = 0; index < cell.length; index++) {
         if(cell[index].innerText >= 0.9) {
@@ -117,6 +119,8 @@ for(let i = 0; i < bpm.length; i++) {
     bpm[i].innerText = parseInt(bpm[i].innerText).toFixed(2);
 }
 
+// Spotify returns the key using pitch class notation (0-11)
+// This converts those integers to their actual pitch letter
 let key = document.getElementsByClassName("key");
 for(let i = 0; i < key.length; i++) {
     let keyText = key[i].innerText;
