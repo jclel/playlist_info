@@ -2,13 +2,13 @@
 
 {% block search %}
 <h2>Enter your Spotify playlist URL below</h2>
-<form action="" method="post">
+<form action="" method="post" id="search_form">
     {{ searchBar.hidden_tag() }}
-    {{ searchBar.playlist_url }}
-    {{ searchBar.submit() }}
+    {{ searchBar.playlist_url(class_="search") }}<br><br>
+    {{ searchBar.submit(class_="submit") }}
 </form>
 
-{{ playlist_id }}
+<p>Click one of the headings below to organise by ascending or descending.</p>
 
 <table id="myTable">
         <tr>
@@ -18,19 +18,141 @@
             <th onclick="sortTable(3)">Energy Rating</th>
             <th onclick="sortTable(4)">Positivity</th>
             <th onclick="sortTable(5)">BPM</th>
+            <th>Time Sig</th>
+            <th>Key</th>
+            <th>Instrumentalness</th>
+            <th>Liveness</th>
+            <th>Loudness</th>
+            <th>Speechiness</th>
+            <th>Analysis URL</th>
         </tr>
         {% for r in result %}
         <tr>
             <td>{{ r['artist_name'] }}</td>
-            <td>"{{ r['track_title'] }}"</td>
+            <td>"<a href="{{ r['track_href' ]}}">{{ r['track_title'] }}</a>"</td>
             <td class="danceRating">{{ r['dance_rating'] }}</td>
             <td class="energyRating">{{ r['energy'] }}</td>
             <td class="positivityRating">{{ r['valence'] }}</td>
             <td class="bpm" id="bpm">{{ r['bpm'] / 100 }} </td>
+            <td>{{ r['signature'] }}</td>
+            <td class="key">{{ r['key'] }}</td>
+            <td>{{ r['instrumentalness'] }}</td>
+            <td>{{ r['liveness'] }}</td>
+            <td>{{ r['loudness'] }}</td>
+            <td>{{ r['speechiness'] }}</td>
+            <td>{{ r['analysis_url'] }}</td>
+
+            
         </tr>
         {% endfor %}
         
         </table>
         
+<script>
+
+const sortTable = (n) => {
+    let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    // set sorting direction to ascending
+    dir = "asc";
+    // loop
+    while(switching) {
+        switching = false;
+        rows = table.rows;
+        for(i = 1; i < (rows.length -1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i+1].getElementsByTagName("td")[n];
+
+            if(dir=="asc") {
+                if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch=true;
+                    break;
+                }
+            } else if(dir == "desc") {
+                if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch=true;
+                    break;
+                }
+            }
+        }
+        if(shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+            switching=true;
+            switchcount++;
+        } else {
+            if(switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+
+
+let cell = document.getElementsByTagName("td") 
+    for (let index = 0; index < cell.length; index++) {
+        if(cell[index].innerText >= 0.9) {
+        cell[index].style.backgroundColor = "#f800ae";
+    } else if(cell[index].innerText < 0.9 && cell[index].innerText >= 0.8) {
+        cell[index].style.backgroundColor = "#f741c0";
+    } else if(cell[index].innerText < 0.8 && cell[index].innerText >= 0.7) {
+        cell[index].style.backgroundColor = "#fa762a";
+    } else if(cell[index].innerText < 0.7 && cell[index].innerText >= 0.6) {
+        cell[index].style.backgroundColor = "#fc8743";
+    } else if(cell[index].innerText < 0.6 && cell[index].innerText >= 0.5) {
+        cell[index].style.backgroundColor = "#ff9557";
+    } else if(cell[index].innerText < 0.5 && cell[index].innerText >= 0.4) {
+        cell[index].style.backgroundColor = "#94eefa";
+    }   
+    }
+
+let bpm = document.getElementsByClassName("bpm");
+for(let i = 0; i < bpm.length; i++) {
+    bpm[i].innerText = bpm[i].innerText * 100;
+    bpm[i].innerText = parseInt(bpm[i].innerText).toFixed(2);
+}
+
+let key = document.getElementsByClassName("key");
+for(let i = 0; i < key.length; i++) {
+    let keyText = key[i].innerText;
+
+    switch(key[i].innerText) {
+        case "3":
+            key[i].innerText = "D#";
+            break;
+        case "4": 
+            key[i].innerText = "E";
+            break;
+        case "5": 
+            key[i].innerText = "F";
+            break;
+        case "6":
+            key[i].innerText = "F#";
+            break;
+        case "7": 
+            key[i].innerText = "G";
+            break;
+        case "8":
+            key[i].innerText = "G#";
+            break;
+        case "9": 
+            key[i].innerText = "A";
+            break;
+        case "10":
+            key[i].innerText = "A#";
+            break;
+        case "11":
+            key[i].innerText = "B";
+            break;
+        default: 
+            break;
+    }
+
+  
+}
+
+</script>
 
 {% endblock %}

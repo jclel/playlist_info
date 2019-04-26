@@ -4,5 +4,5 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
 class SearchPlaylist(FlaskForm):
-    playlist_url = StringField('Playlist URL')
+    playlist_url = StringField('Playlist URL', validators=[DataRequired()])
     submit = SubmitField('Search')

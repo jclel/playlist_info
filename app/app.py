@@ -59,7 +59,7 @@ def index():
         print(results(playlist_id))
         result = results(playlist_id)
         print(result[0])
-       
+    
     return render_template('search.html', searchBar=searchBar, playlist_id=playlist_id, result=result)
 
 
