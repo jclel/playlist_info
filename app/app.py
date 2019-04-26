@@ -67,7 +67,7 @@ def results(playlist_id):
     print(playlist_id)
     tracks_url = base_url + 'playlists/' + playlist_id + '/tracks'
     url_fields = '?fields=items(added_by.id%2C%20track(name,artists,id))'
-    limit = '&limit=2'
+    limit = '&limit=100'
     url = tracks_url + url_fields + limit
     print(url)
     response = requests.get(url, headers=headers)
