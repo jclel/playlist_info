@@ -66,8 +66,9 @@ def index():
 def results(playlist_id):
     print(playlist_id)
     tracks_url = base_url + 'playlists/' + playlist_id + '/tracks'
-    url_fields = '?fields=items(added_by.id%2C%20track(name,artists,id))&limit=5'
-    url = tracks_url + url_fields
+    url_fields = '?fields=items(added_by.id%2C%20track(name,artists,id))'
+    limit = '&limit=2'
+    url = tracks_url + url_fields + limit
     print(url)
     response = requests.get(url, headers=headers)
     tracks_data = response.json() 

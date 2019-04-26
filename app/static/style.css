@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-   
+   margin: auto;
     width: 1000px;
 }
 
@@ -52,7 +52,9 @@ a {
     border: none;
     font-size: 20px;
     color: white;
-    
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 3px;
 }
 
 .submit:hover {
@@ -61,13 +63,17 @@ a {
 
 table {
     font-size: 16px;
+    margin-left: -35px;
+    border: none;
     
 }
 
 tr {
-    background: #1db954;
+    background: #191414;
     color: white;
-    border-radius: 50%;
+    border-bottom: 1px solid #a7a7a7;
+    
+    
 }
 
 
@@ -82,15 +88,46 @@ h2 {
 
 
 tr:hover {
-    background: #18a048;
+    /* background: #18a048; */
+    
+    
 }
 
 td {
     padding: 15px;
+    border: none;
+    border-bottom: 1px solid #a7a7a7;
 }
 
 th {
     padding: 15px;
+    color: #a7a7a7;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: lighter;
+    border: none;
+    border-bottom: 1px solid #141919;
+    
+}
+
+.explanations {
+    background-color: #353434;
+    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.terms {
+    line-height: 30px;
+    font-size: 20px;
+}
+
+footer {
+    border-top: 1px solid grey;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    
 }
 /* 
 Sorting tables:

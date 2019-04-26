@@ -18,21 +18,21 @@
             <th onclick="sortTable(3)">Energy Rating</th>
             <th onclick="sortTable(4)">Positivity</th>
             <th onclick="sortTable(5)">BPM</th>
-            <th>Time Sig</th>
-            <th>Key</th>
-            <th>Instrumentalness</th>
-            <th>Liveness</th>
-            <th>Loudness</th>
-            <th>Speechiness</th>
-            <th>Analysis URL</th>
+            <th onclick="sortTable(6)">Time Sig</th>
+            <th onclick="sortTable(7)">Key</th>
+            <th onclick="sortTable(8)">Inst'lness</th>
+            <th onclick="sortTable(9)">Live</th>
+            <th onclick="sortTable(10)">Loud</th>
+            <th onclick="sortTable(11)">Speech</th>
+            <!-- <th>Analysis URL</th> -->
         </tr>
         {% for r in result %}
         <tr>
             <td>{{ r['artist_name'] }}</td>
-            <td>"<a href="{{ r['track_href' ]}}">{{ r['track_title'] }}</a>"</td>
-            <td class="danceRating">{{ r['dance_rating'] }}</td>
-            <td class="energyRating">{{ r['energy'] }}</td>
-            <td class="positivityRating">{{ r['valence'] }}</td>
+            <td>"{{ r['track_title'] }}"</td>
+            <td class="danceRating colourCode">{{ r['dance_rating'] }}</td>
+            <td class="energyRating colourCode">{{ r['energy'] }}</td>
+            <td class="positivityRating colourCode">{{ r['valence'] }}</td>
             <td class="bpm" id="bpm">{{ r['bpm'] / 100 }} </td>
             <td>{{ r['signature'] }}</td>
             <td class="key">{{ r['key'] }}</td>
@@ -40,7 +40,7 @@
             <td>{{ r['liveness'] }}</td>
             <td>{{ r['loudness'] }}</td>
             <td>{{ r['speechiness'] }}</td>
-            <td>{{ r['analysis_url'] }}</td>
+            <!-- <td>{{ r['analysis_url'] }}</td> -->
 
             
         </tr>
@@ -91,7 +91,7 @@ const sortTable = (n) => {
 }
 
 
-let cell = document.getElementsByTagName("td") 
+let cell = document.getElementsByClassName("colourCode") 
     for (let index = 0; index < cell.length; index++) {
         if(cell[index].innerText >= 0.9) {
         cell[index].style.backgroundColor = "#f800ae";
@@ -105,7 +105,9 @@ let cell = document.getElementsByTagName("td")
         cell[index].style.backgroundColor = "#ff9557";
     } else if(cell[index].innerText < 0.5 && cell[index].innerText >= 0.4) {
         cell[index].style.backgroundColor = "#94eefa";
-    }   
+    } else if(cell[index].innerText < 0.4 && cell[index].innerText >= 0) {
+        cell[index].style.backgroundColor = "#00e1ff";
+    }  
     }
 
 let bpm = document.getElementsByClassName("bpm");
@@ -119,6 +121,15 @@ for(let i = 0; i < key.length; i++) {
     let keyText = key[i].innerText;
 
     switch(key[i].innerText) {
+        case "0": 
+            key[i].innerText = "C";
+            break;
+        case "1":
+            key[i].innerText = "C#";
+            break; 
+        case "2":
+            key[i].innerText = "D";
+            break;
         case "3":
             key[i].innerText = "D#";
             break;

@@ -5,4 +5,4 @@ from wtforms.validators import DataRequired
 
 class SearchPlaylist(FlaskForm):
     playlist_url = StringField('Playlist URL', validators=[DataRequired()])
-    submit = SubmitField('Search')
+    submit = SubmitField('SEARCH')

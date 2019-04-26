@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="../static/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>What's In Yr Playlist?</title>
 </head>
 <body>
     <div class="container">
-        <h1>Playlist Info</h1>
+        <h1>What's In Yr Playlist?</h1>
         {% block search %}
         {% endblock %}
         {% block results %}
@@ -18,6 +18,28 @@
             flask content here
         -->
 
+        <div class="explanations">
+            <h2>What's this?</h2>
+            <p>Spotify keeps all kinds of cool metrics in the metadata of its tracks.</p>
+            <p>You won't see most of them in the app, but they're interesting nonetheless.</p>
+            <p>Originally I made this to help with sequencing a wedding playlist. But I figure others might find some of these metrics interesting.</p>
+            <p class="terms"><b>Terms:</b><br>
+                Dance Rating: "Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable."<br><br>
+                Energy: "Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy."<br><br>
+                Positivity: Spotify refers to this internally as valence. "Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry)."<br><br>
+                Instrumentalness: "Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0."<br><br>
+                Liveness: "Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live."<br><br>
+                Loudness: "The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude)."<br><br>
+                Speechiness: "Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks. "
+            
+            </p>
+
+            
+        </div>
+
+    <footer>
+        made w/ curiosity by <a href="https://github.com/rmit-jc">jakec</a> circa apr 2019
+    </footer>
     </div>
     
 </body>
